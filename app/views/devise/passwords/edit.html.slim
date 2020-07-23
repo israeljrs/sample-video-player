@@ -1,0 +1,22 @@
+.container-fluid
+  .container
+    .row.mt-4.justify-content-center
+      .col-6
+        h3.text-center Alterar minha senha
+    .row.mt-2.justify-content-center
+      .col-6
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+          = devise_error_messages!
+          = f.hidden_field :reset_password_token
+          p.text-center
+            | Por favor informe a nova senha e confirme a alteração nos campos abaixo.
+          = f.input :password, label: 'Senha: ',
+                    required: true,
+                    input_html: { placeholder: "Nova senha", autocomplete: "off" }
+          = f.input :password_confirmation, label: 'Confirma senha: ',
+                    required: true,
+                    input_html: { placeholder: "Confirma senha", autocomplete: "off" }
+          = f.button :submit, "Resetar minha senha", class: "btn btn-primary btn-block btn-lg"
+    .row.justify-content-center
+      .col-6.text-center
+        = render "devise/shared/links"

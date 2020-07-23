@@ -1,0 +1,26 @@
+.container-fluid
+  .container
+    .row.mt-4
+      .col.text-center
+        = image_tag "logo.jpg", style: "width: 300px;"
+    .row.mt-4.justify-content-center
+      .col-4
+        = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .form-group
+            = f.input :email, label: 'Login ou E-mail: ',
+                    required: true,
+                    autofocus: true,
+                    input_html: { placeholder: "Seu e-email", autocomplete: "email" }
+          .form-group
+            = f.input :password, label: 'Senha: ',
+                    required: true,
+                    input_html: { placeholder: "Sua senha", autocomplete: "current-password" }
+          - if devise_mapping.rememberable?
+            .form-group
+              = f.input :remember_me, as: :boolean
+          .form-group
+            .col-sm-12.text-center
+              = f.button :submit, "Entrar", class: "btn btn-primary btn-block btn-lg"
+    .row.justify-content-center
+      .col-6.text-center
+        = render "devise/shared/links"

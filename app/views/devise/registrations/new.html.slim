@@ -1,0 +1,28 @@
+.container-fluid
+  .container
+    .row.mt-4
+      .col.text-center
+        = image_tag "logo.jpg", style: "width: 300px;"
+    .row.mt-4.justify-content-center
+      .col-4
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          = f.input :email, label: 'Login ou E-mail: ',
+                    required: true,
+                    autofocus: true,
+                    input_html: { placeholder: "Seu e-email", autocomplete: "email" }
+          = f.input :username, label: 'Nome: ',
+                    input_html: { placeholder: "Informe seu nome" }
+          = f.input :phone, label: 'Telefone: ',
+                    input_html: { placeholder: "Informe seu telefone" }
+          = f.input :password, label: 'Senha: ',
+                    required: true,
+                    input_html: { placeholder: "Sua senha", autocomplete: "current-password" }
+          = f.input :password_confirmation, label: 'Confirma senha: ',
+                    required: true,
+                    input_html: { placeholder: "Confirma senha", autocomplete: "off" }
+          = f.button :submit, "Cadastrar", class: "btn btn-primary btn-block btn-lg"
+              
+    .row.justify-content-center
+      .col-6.text-center
+        = render "devise/shared/links"

@@ -1,0 +1,57 @@
+= render "shared/menu"
+
+.container-fluid
+  .container
+    .row
+      .col
+        .jumbotron.mt-2
+          h3.text-center Lista de Usuários
+    = flash_helper
+    .row
+      .col-md-9
+        = form_tag search_admin_users_path, { :method => "post" } do
+          .form-group
+            = text_field_tag(:search, nil, class: "form-control", placeholder: "Digite aqui o nome à pesquisar")
+      .col-md-3.text-right
+        = link_to new_admin_user_path, class: 'btn btn-primary btn-block ml-2', title: "Incluir novo associado" do
+          i.fas.fa-user-plus
+          |   Novo Usuário
+    .row.mt-4
+      .col
+        table#dttb.table.table-striped
+          thead
+            tr
+              td E-mail
+              td{class="d-none d-sm-block"} Nome
+              td{ class="text-center" style="width: 15%;" } ação
+          tbody
+            - @users.each do | user |
+              tr
+                td = user.email
+                td{class="d-none d-sm-block"} = user.username
+                td.text-center
+                  = link_to admin_user_path(user), class: "btn btn-outline-secondary btn-sm fz-10", title: "Visualizar" do
+                    i.fas.fa-eye
+                  |  || 
+                  = link_to edit_admin_user_path(user), class: "btn btn-outline-info btn-sm fz-10", title: "Editar" do
+                    i.fas.fa-edit
+                  |  || 
+                  = link_to admin_user_path(user), method: :delete, data: { confirm: "Deseja escluir esse associado ?" }, class: "btn btn-outline-danger btn-sm fz-10", title: "excluir" do
+                    i.fas.fa-trash-alt
+
+    .row.justify-content-center
+      .col
+        = will_paginate @users, :params => { :search => @search }, list_classes: %w(pagination justify-content-center), previous_label: "Anterior", next_label: "Próxima", renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+    .row
+      .col.text-center
+        = link_to 'Home', admin_home_path
+
+= render "shared/footer"
+
+javascript:
+  $(document).on('turbolinks:load', function() {
+    $('#dttb').DataTable().destroy();
+    $('#dttb').dataTable({
+      "searching": false
+    });
+  });

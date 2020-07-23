@@ -1,0 +1,24 @@
+= render "shared/menu"
+
+.container-fluid
+  .container
+    .row.mt-2
+      .col
+        .jumbotron
+          h3.text-center Lista de Clientes
+    = flash_helper
+    .row.mt-2
+      .col-3
+        | Nome: 
+      .col
+        = @client.nome
+    .row
+      .col-3
+        | Contato: 
+      .col
+        = @client.email
+    .row.mt-4
+      .col.text-center
+        = link_to 'Voltar', admin_clients_path
+
+= render "shared/footer"

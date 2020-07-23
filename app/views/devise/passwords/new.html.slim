@@ -1,0 +1,18 @@
+.container-fluid
+  .container
+    .row.mt-4.justify-content-center
+      .col-6
+        h3.text-center Resetar minha senha
+    .row.mt-2.justify-content-center
+      .col-6
+        = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          = devise_error_messages!
+          p.text-center
+            | Informe o seu email abaixo para receber o link com as instruções para resetar sua senha.
+          = f.input :email, label: 'E-mail: ',
+                    autofocus: true,
+                    input_html: { placeholder: "Seu e-email", autocomplete: "email" }
+          = f.button :submit, "Resetar minha senha", class: "btn btn-primary btn-block btn-lg"
+    .row.justify-content-center
+      .col-6.text-center
+        = render "devise/shared/links"

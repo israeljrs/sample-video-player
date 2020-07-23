@@ -1,0 +1,16 @@
+.container-fluid
+  .container
+    .row.mt-4.justify-content-center
+      .col-6
+        h3.text-center Enviar instruções para recuperar senha.
+    .row.mt-2.justify-content-center
+      .col-6
+        = simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+          = devise_error_messages!
+          = f.input :email, label: 'Login ou E-mail: ',
+                    autofocus: true,
+                    input_html: { placeholder: "Seu e-email", autocomplete: "email" }
+          = f.button :submit, "Enviar unlook token", class: "btn btn-primary btn-block btn-lg"
+    .row.justify-content-center
+      .col-6.text-center
+        = render "devise/shared/links"

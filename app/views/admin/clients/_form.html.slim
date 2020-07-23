@@ -1,0 +1,22 @@
+.container-fluid
+  .container
+    .row.mt-2
+      .col
+        .jumbotron
+          h3.text-center Cadstro de Clientes
+    = flash_helper
+    .row.justify-content-center
+      .col-sm-8
+        = simple_form_for [:admin, @client] do |f|
+          = f.input :nome, label: 'Nome: ', placeholder: "Informe seu nome completo"
+          .form-row
+            .form-group.col-md-6
+              = f.input :email, label: 'E-mail: ', placeholder: 'Informe o E-mail'
+            .form-group.col-md-6
+              = f.input :fone, label: 'Telefone: ', placeholder: 'Informe seu telefone'
+          .form-group
+            .col.text-center
+              = f.submit value: btn_name, class: "btn btn-info"
+    .row
+      .col.text-center
+        = link_to 'Voltar', admin_clients_path

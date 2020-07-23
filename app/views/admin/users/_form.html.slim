@@ -1,0 +1,32 @@
+.container-fluid
+  .container
+    .row.mt-2
+      .col
+        .jumbotron
+          h3.text-center Cadstro de Usuários
+    = flash_helper
+    .row.justify-content-center
+      .col-sm-8
+        = simple_form_for [:admin, @user] do |f|
+          = f.input :email, label: 'E-mail: ', placeholder: "Informe seu e-mail."
+          .form-row
+            .form-group.col-md-6
+              = f.input :username, label: 'Nome: ', placeholder: 'Informe um nome'
+            .form-group.col-md-6
+              = f.input :phone, label: 'Telefone: ', placeholder: 'Informe o celular'
+          .form-row
+            .form-group.col-md-6
+              = f.input :password, label: 'Senha: ',
+                    required: true,
+                    input_html: { placeholder: "Sua senha", autocomplete: "current-password" }
+            .form-group.col-md-6
+              = f.input :password_confirmation, label: 'Confirma senha: ',
+                    required: true,
+                    input_html: { placeholder: "Confirma senha", autocomplete: "off" }
+          = f.association :roles, label: "Permissões: ", as: :check_boxes, collection: Role.all
+          .form-group
+            .col.text-center
+              = f.submit value: btn_name, class: "btn btn-info"
+    .row
+      .col.text-center
+        = link_to 'Voltar', admin_users_path
