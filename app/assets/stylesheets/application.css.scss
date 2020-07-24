@@ -14,6 +14,25 @@
  *= require sweetalert2/dist/sweetalert2.min
  *= require animate.css/animate.min
  *= require @fortawesome/fontawesome-free/css/all
+ *= require video.js/dist/video-js.min
+ *= require @fancyapps/fancybox/dist/jquery.fancybox
  *= require_tree .
  *= require_self
  */
+
+ .adminDemoVideo {
+    position: relative;
+    display: inline-block;
+  }
+
+.adminDemoVideo > svg {
+    z-index: 5;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate( -50%, -50% );
+    padding: 5px;
+    color: white;
+    background-color: rgba(23, 35, 34, 0.75);
+    border-radius: 5px 5px 5px 5px;
+}

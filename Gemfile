@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.6.6'
 
-
 gem 'rails', '~> 5.2.4'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'sass-rails', '~> 5.0'
@@ -26,6 +25,9 @@ gem 'cancancan'
 gem 'rolify'
 gem 'data-confirm-modal'
 gem 'gravatar_image_tag'
+gem 'aws-sdk-s3', require: false
+gem 'mini_magick'
+
 group :production, :staging do
   gem 'rails_12factor'
 end

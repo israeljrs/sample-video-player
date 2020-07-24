@@ -1,0 +1,21 @@
+.container-fluid
+  .container
+    .row.mt-2
+      .col
+        .jumbotron
+          h3.text-center Cadstro do Filme
+    = flash_helper
+    .row.justify-content-center
+      .col-sm-8
+        = simple_form_for [:admin, @movie] do |f|
+          = f.input :title, label: 'Nome: ', placeholder: "Informe seu nome completo"
+          = f.input :url, label: 'URL: ', placeholder: "Caminho para o video"
+          = f.input :image, label: 'Thumbnail: '
+          = f.input :published, lable: 'Publicado: '
+          = f.input :description
+          .form-group
+            .col.text-center
+              = f.submit value: btn_name, class: "btn btn-info"
+    .row
+      .col.text-center
+        = link_to 'Voltar', admin_movies_path

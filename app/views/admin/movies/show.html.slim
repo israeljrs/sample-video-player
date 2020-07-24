@@ -1,0 +1,32 @@
+= render "shared/menu"
+
+.container-fluid
+  .container
+    .row.mt-2
+      .col
+        .jumbotron
+          h3.text-center Detalhes do Video
+    = flash_helper
+    .row.mt-2
+      .col-3
+        | Nome: 
+      .col
+        = @movie.title
+    .row
+      .col-3
+        | Contato: 
+      .col
+        = @movie.description
+    .row
+      .col-3 Criado em:
+      .col #{@movie.created_at.strftime("%H:%M:%S %d/%m/%Y")}
+    .row
+      .col.text-center
+        video[id='my-video' class="video-js vjs-default-skin vjs-big-play-centered m-auto" poster="#{@movie.image.service_url}" controls preload width="640" height="360" data-setup='{}']
+          source[src="#{@movie.url}" type='application/x-mpegURL']
+
+    .row.mt-4
+      .col.text-center
+        = link_to 'Voltar', admin_movies_path
+
+= render "shared/footer"

@@ -18,4 +18,6 @@
 //= require sweetalert2/dist/sweetalert2.all
 //= require data-confirm-modal
 //= require @fortawesome/fontawesome-free/js/all
+//= require video.js/dist/video
+//= require @fancyapps/fancybox/dist/jquery.fancybox
 //= require_tree .

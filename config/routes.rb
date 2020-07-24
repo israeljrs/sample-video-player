@@ -8,11 +8,16 @@ Rails.application.routes.draw do
       post "search", on: :collection
       get "search", on: :collection
     end
+    resources :movies do
+      post "search", on: :collection
+      get "search", on: :collection
+    end
     resources :users do
       post "search", on: :collection
       get "search", on: :collection
     end
   end
   root 'welcome#index'
+  post 'player/views', to: 'welcome#views'
 
 end

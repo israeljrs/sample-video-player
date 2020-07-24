@@ -4,9 +4,63 @@
   .container
     .row.mt-2
       .col
-        .jumbotron
-          h3.text-center.animated.bounce
-            | <i class="fa fa-id-card" aria-hidden="true"></i>
-            |  Hello by Rails 5
+        - if @movies.blank?
+          .jumbotron
+            h3.text-center.animated.flash Sem videos para exibição no momento !!!
+        - else
+          .card-columns
+            - @movies.each do | movie |
+              .card
+                a{href="#{movie.url}" class="adminDemoVideo" data-width="640" data-height="360" data-movie="#{movie.id}"}
+                  i.far.fa-play-circle.fa-3x
+                  = image_tag movie.image, class: "card-img-top"
+                .card-body
+                  h5.card-title #{movie.title}
+                  p.card-text #{movie.description}
+                .card-footer.text-right
+                  small.text-muted Views: #{movie.movie_views.count}
+
+    .row.justify-content-center
+      .col
+        = will_paginate @movies, :params => { :search => @search }, list_classes: %w(pagination justify-content-center), previous_label: "Anterior", next_label: "Próxima", renderer: WillPaginate::ActionView::BootstrapLinkRenderer
 
 = render "shared/footer"
+
+javascript:
+  $(document).on('turbolinks:load', function() {
+    $('.adminDemoVideo').on('click', function(e) {
+      const frmData = new FormData();
+      frmData.append('movie_id', $(this).attr('data-movie'));
+      e.preventDefault();
+      $.fancybox.open({ 
+        src: '<video id="my-video" width="' + $(this).attr('data-width') +
+          '" height="' + $(this).attr('data-height') +
+          '" class="video-js vjs-default-skin vjs-big-play-centered">' +
+          '<source src="' + $(this).attr('href') + '" type="application/x-mpegURL" /></video>',
+        type: 'html',
+        opts: {
+          afterShow: function() {
+            const video = videojs('my-video', {
+              controls: true,
+            });
+            video.ready(function() {
+              video.play();
+              Rails.ajax({
+                type: "post",
+                url: '/player/views',
+                data: frmData,
+                success: function(args) {
+                  if (args.status) {
+                    $(e.currentTarget).parent().children().last().find('.text-muted').text('Views: ' + args.total);
+                  }
+                }
+              });
+            });
+          },
+          afterClose: function() {
+            videojs('my-video').dispose();
+          }
+        }
+      });
+    });
+  });

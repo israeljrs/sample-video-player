@@ -1,0 +1,59 @@
+= render "shared/menu"
+
+.container-fluid
+  .container
+    .row
+      .col
+        .jumbotron.mt-2
+          h3.text-center Minha lista de Videos
+    = flash_helper
+    .row
+      .col-md-9
+        = form_tag search_admin_movies_path, { :method => "post" } do
+          .form-group
+            = text_field_tag(:search, nil, class: "form-control", placeholder: "Digite aqui o nome à pesquisar")
+      .col-md-3.text-right
+        = link_to new_admin_movie_path, class: 'btn btn-primary btn-block ml-2', title: "Incluir novo associado" do
+          i.fas.fa-user-plus
+          |   Novo Filme
+    .row.mt-4
+      .col
+        table#dttb.table.table-striped
+          thead
+            tr
+              td{ style="width: 130px;" } Video
+              td Titulo
+              td Data
+              td Publicado
+              td{ class="text-center" style="width: 15%;" } ação
+          tbody
+            - @movies.each do | movie |
+              tr
+                td = image_tag movie.image.variant(resize: "100X100")
+                td = movie.title
+                td = movie.created_at.strftime("%H:%M:%S %d/%m/%Y")
+                td = movie.published
+                td.text-center
+                  = link_to admin_movie_path(movie), class: "btn btn-outline-secondary btn-sm fz-10", title: "Visualizar", data: { turbolinks: "false" } do
+                    i.fas.fa-eye
+                  = link_to edit_admin_movie_path(movie), class: "btn btn-outline-info btn-sm fz-10 ml-2", title: "Editar" do
+                    i.fas.fa-edit
+                  = link_to admin_movie_path(movie), method: :delete, data: { confirm: "Deseja escluir esse associado ?" }, class: "btn btn-outline-danger btn-sm fz-10 ml-2", title: "excluir" do
+                    i.fas.fa-trash-alt
+
+    .row.justify-content-center
+      .col
+        = will_paginate @movies, :params => { :search => @search }, list_classes: %w(pagination justify-content-center), previous_label: "Anterior", next_label: "Próxima", renderer: WillPaginate::ActionView::BootstrapLinkRenderer
+    .row
+      .col.text-center
+        = link_to 'Home', admin_home_path
+
+= render "shared/footer"
+
+javascript:
+  $(document).on('turbolinks:load', function() {
+    $('#dttb').DataTable().destroy();
+    $('#dttb').dataTable({
+      "searching": false
+    });
+  });
