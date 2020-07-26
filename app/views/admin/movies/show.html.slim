@@ -22,7 +22,7 @@
       .col #{@movie.created_at.strftime("%H:%M:%S %d/%m/%Y")}
     .row
       .col.text-center
-        video[id='my-video' class="video-js vjs-default-skin vjs-big-play-centered m-auto" poster="#{@movie.image.service_url}" controls preload width="640" height="360" data-setup='{}']
+        video[id='my-video' class="video-js vjs-default-skin vjs-big-play-centered m-auto" poster="#{@movie.image.attached? ? @movie.image.service_url : 'poster.png' }" controls preload width="640" height="360" data-setup='{}']
           source[src="#{@movie.url}" type='application/x-mpegURL']
 
     .row.mt-4

@@ -1,10 +1,9 @@
 FactoryBot.define do
   factory :movie do
-    user { nil }
+    user
     title { "MyString" }
     description { "MyText" }
-    image { "" }
     url { "MyString" }
-    published { false }
+    published { true }
   end
 end

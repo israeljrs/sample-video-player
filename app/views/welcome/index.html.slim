@@ -13,7 +13,7 @@
               .card
                 a{href="#{movie.url}" class="adminDemoVideo" data-width="640" data-height="360" data-movie="#{movie.id}"}
                   i.far.fa-play-circle.fa-3x
-                  = image_tag movie.image, class: "card-img-top"
+                  = image_tag movie.image.attached? ? movie.image : "player.png", class: "card-img-top"
                 .card-body
                   h5.card-title #{movie.title}
                   p.card-text #{movie.description}

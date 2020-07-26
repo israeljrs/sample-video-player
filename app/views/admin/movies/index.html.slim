@@ -29,7 +29,7 @@
           tbody
             - @movies.each do | movie |
               tr
-                td = image_tag movie.image.variant(resize: "100X100")
+                td = image_tag movie.image.attached? ? movie.image.variant(resize: "100X100") : "player.png", style: "width: 100px"
                 td = movie.title
                 td = movie.created_at.strftime("%H:%M:%S %d/%m/%Y")
                 td = movie.published

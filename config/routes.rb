@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   namespace :admin do
     get "index", to: "sessions#dashbord", as: "dashbord"
     get "home", to: "sessions#dashbord", as: "home"
-    resources :clients do
-      post "search", on: :collection
-      get "search", on: :collection
-    end
     resources :movies do
       post "search", on: :collection
       get "search", on: :collection

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :movie_view do
-    movie { nil }
+    movie
     browser { "MyString" }
   end
 end

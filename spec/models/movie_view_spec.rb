@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe MovieView, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'when model movie view is valid' do
+    subject { build(:movie_view) }
+    it { expect(subject).to be_valid }
+  end
 end
