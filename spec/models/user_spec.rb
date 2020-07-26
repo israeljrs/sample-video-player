@@ -5,7 +5,6 @@ RSpec.describe User, type: :model do
     subject { build(:user) }
     it { 
       expect(subject).to be_valid
-      # expect(subject.has_role? :admin).to eq true
     }
   end
 
