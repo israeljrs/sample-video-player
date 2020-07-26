@@ -46,7 +46,7 @@
         = will_paginate @movies, :params => { :search => @search }, list_classes: %w(pagination justify-content-center), previous_label: "Anterior", next_label: "Próxima", renderer: WillPaginate::ActionView::BootstrapLinkRenderer
     .row
       .col.text-center
-        = link_to 'Home', admin_home_path
+        = link_to 'Home', root_path
 
 = render "shared/footer"
 

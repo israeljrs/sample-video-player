@@ -16,7 +16,9 @@
                   = image_tag movie.image.attached? ? movie.image : "player.png", class: "card-img-top"
                 .card-body
                   h5.card-title #{movie.title}
-                  p.card-text #{movie.description}
+                  p.m-0.card-text #{movie.description}
+                  p
+                    small.text-muted #{movie.user.email}
                 .card-footer.text-right
                   small.text-muted Views: #{movie.movie_views.count}
 
