@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.6.6'
+ruby '2.6.9'
 
 gem 'rails', '~> 5.2.4'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -49,7 +49,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'factory_bot_rails'
+  # gem 'factory_bot_rails'
   gem 'capybara'
   gem 'poltergeist'
   gem 'rails-controller-testing'
